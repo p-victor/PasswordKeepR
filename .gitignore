@@ -1,4 +1,5 @@
 node_modules/
+archive/
 public/styles
 .env
 *.log
