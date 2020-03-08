@@ -1,9 +1,6 @@
 node_modules/
-<<<<<<< HEAD
 # public/styles
-=======
 archive/
->>>>>>> fb463186ca792b9f3e81e5425bc208e22d43c075
 .env
 *.log
 *.sqlite3
