@@ -1,0 +1,16 @@
+.sign-inUp{
+  width: 75%;
+  /* margin: auto; */
+  padding: 5%;
+  background-color: beige;
+  border-radius: 15px;
+  /* border-color: coral; */
+  border: solid coral 5px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
