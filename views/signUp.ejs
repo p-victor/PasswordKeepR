@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PasswordKeepR - Sign Up</title>
-  <!-- <link rel="import" href="./header-copy.html"> -->
-
-    <!-- <link rel="stylesheet" href="/styles/header.css" type="text/css" /> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../public/styles/signIn_signUp.css">
-
-
+  <%- include("partials/_basic_html_setup.ejs") %>
+  <link rel="stylesheet" href="../public/styles/signIn_signUp.css">
 </head>
+
 <body>
-
-
   <div class="sign-inUp">
     <form>
       <div class="form-group">
@@ -32,7 +20,7 @@
       </div>
       <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
     </form>
-
   </div>
+  <%- include("partials/_footer_scripts.ejs") %>
 </body>
 </html>
