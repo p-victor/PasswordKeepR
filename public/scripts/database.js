@@ -21,7 +21,7 @@ const pool = new Pool(require('../../lib/db.js'));
 //# user/owner can set category
 //# user/owner can change category
 //# user/owner can remove category / = uncategorized
-// user/owner can share or unshare an app_credentials (can_edit) => can view
+//# user/owner can share or unshare an app_credentials (can_edit) => can view
 // ------
 // user/viewer CAN view the app_credentials : shared to him.
 
