@@ -1,12 +1,5 @@
-#header {
-  width: 100%;
-  height: 4em;
-  background-color: blue;
-}
-
 #sidebar {
   min-height: 100vh;
-  /* position: absolute; */
 }
 
 .hide {
@@ -23,10 +16,6 @@ a {
 }
 
 @media only screen and (min-width:0) and (max-width:767px) {
-  #header {
-    background-color: orange;
-  }
-
   #sidebar {
     display: flex;
   }
