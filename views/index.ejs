@@ -1,9 +1,21 @@
   <%- include("partials/_basic_html_setup.ejs") %>
+  <link rel="stylesheet" href="/styles/signIn_signUp.css">
+  <link rel="stylesheet" href="/styles/sidebar.css" type="text/css">
 </head>
 
-  <body>
-    <%- include("partials/_sidebar-header.ejs") %>
-    <h1>Hello World!</h1>
-    <%- include("partials/_footer_scripts.ejs") %>
-  </body>
+<body>
+  <%- include("partials/_header.ejs") %>
+
+  <div class="d-flex justify-content-between">
+    <%- include("partials/_sidebar.ejs") %>
+
+    <div class="sign-inUp container">
+      <h1>Hello World!</h1>
+    </div>
+
+    <div></div>
+  </div>
+
+  <%- include("partials/_footer_scripts.ejs") %>
+</body>
 </html>
