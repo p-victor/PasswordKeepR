@@ -9,22 +9,24 @@
   <div class="d-flex justify-content-between">
     <%- include("partials/_sidebar.ejs") %>
 
-    <div class="sign-inUp container">
+    <div class="sign-inUp container register">
+      <h1>REGISTER</h1>
       <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email..">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-secondary text-white">Email</span>
+          </div>
+          <input type="text" class="form-control" readonly placeholder="Enter your email ...">
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password..">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-secondary text-white">Password</span>
+          </div>
+          <input type="text" class="form-control" readonly placeholder="Enter your password ...">
         </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" >
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+
+        <button id="register" type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
       </form>
     </div>
 
