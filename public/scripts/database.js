@@ -90,7 +90,7 @@ exports.deleteUserAccount = deleteUserAccount;
 
 const createAppCredential = function(userDataObj, appCredentialsObj, appObj, categoryObj) {
   const query = `
-    INSERT INTO app_credentials(username, password, owner_id, app_id, category_id)
+    INSERT INTO app_credentials (username, password, owner_id, app_id, category_id)
     VALUES
     ($1, $2, $3, $4, $5)
   ;
