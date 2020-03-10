@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { createAppCredential } = require("../public/scripts/database")
+const { generatePassword } = require("../public/scripts/generatePassword")
 
-module.exports = (db) => {
+module.exports = ({createAppCredential}) => {
   router.get("/new", (req, res) => {
     res.render("createPassword");
 
@@ -15,26 +15,27 @@ module.exports = (db) => {
     //create new password
     console.log(req.body)
 
-    let userObj = {
-      id: 1
-    }
+    let userObj = {id: 1}
+    let appObj = {id: 1}
+    let catObj = {id: 0}
 
-    let appObj = {
-      id: 1
-    }
+    let uppercase;
+    let spChar;
+    let numbers;
 
-    let catObj = {
-      id: 0
-    }
+    !req.body.uppercase ? uppercase = false : uppercase = true;
+    !req.body.spChar ? spChar = false : spChar = true;
+    !req.body.numbers ? numbers = false : numbers = true;
+
+
 
     let appCred = {
       username: req.body.username,
-      password: "eric was here"
+      password: generatePassword(uppercase, req.body.length, spChar, numbers)
     }
 
     createAppCredential(userObj, appCred, appObj, catObj);
-
-
+    res.redirect('./new');
   });
   router.post("/:pass/update", (req, res) => {
     //update the password
