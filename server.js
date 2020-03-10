@@ -7,6 +7,7 @@ const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
+const cookieSession = require('cookie-session');
 const app = express();
 const morgan = require('morgan');
 
@@ -15,6 +16,9 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
+// Cookie session setup
+app.use(cookieSession({ name: 'session', keys: ["user_id"], maxAge: 24 * 60 * 60 * 1000 /*24 hours*/ }));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -28,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //#########login middleware
 // app.use((req, res, next) => {
 //   const allowedPaths = ['/users/signin', '/users/signup']
-//   if (/* req.session.user_id ||  */ allowedPaths.some(allowedPath => req.path.startsWith(allowedPath))) {
+//   if ( req.session.user_id || allowedPaths.some(allowedPath => req.path.startsWith(allowedPath))) {
 //     next();
 //   }
 //   else {
