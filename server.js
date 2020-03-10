@@ -37,14 +37,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   }
 // });
 
+// app.get((req, res) => {
+//   res.session.user_id;
+// })
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const passwordsRoutes = require("./routes/passwords");
+const sidebarRoutes = require("./routes/sidebar");
 
 // Mount all resource routes
 app.use("/users", usersRoutes(dbHelper));
 app.use("/passwords", passwordsRoutes(dbHelper));
+app.use("/api/", sidebarRoutes(dbHelper));
 
 // Home page
 app.get("/", (req, res) => {

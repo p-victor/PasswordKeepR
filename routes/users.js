@@ -7,7 +7,6 @@ module.exports = ({createUserAccount, getUserByEmail}) => {
     res.render("login");
   });
   router.post("/login", (req, res) => {
-    req.session.user_id = undefined;
     getUserByEmail(req.body.email).then(query => {
       if (verifyLoginInfo(req.body.email, req.body.password, query[0])) {
         req.session.user_id = query[0].id;
@@ -22,7 +21,6 @@ module.exports = ({createUserAccount, getUserByEmail}) => {
     res.render("register");
   });
   router.post("/register", (req, res) => {
-    req.session.user_id = undefined;
     getUserByEmail(req.body.email).then(query => {
       if (verifyRegisterInfo(req.body.email, req.body.password, query[0])) {
         createUserAccount({
@@ -43,8 +41,8 @@ module.exports = ({createUserAccount, getUserByEmail}) => {
   });
 
   router.get("/logout", (req, res) => {
-    req.session.user_id = undefined;
-    res.redirect("/login")
+    req.session = null;
+    res.redirect("/login");
   });
 
   return router;
