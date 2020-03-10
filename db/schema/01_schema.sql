@@ -39,7 +39,7 @@ CREATE TABLE app_credentials (
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   app_id INTEGER REFERENCES app_list(id) ON DELETE CASCADE,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  last_password_reset DATE
+  last_password_reset DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 -- middle tables connecting 'users' and 'app_credentials' and adding a "edit" privilidge.
