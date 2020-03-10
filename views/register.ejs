@@ -1,0 +1,37 @@
+  <%- include("partials/_basic_html_setup.ejs") %>
+  <link rel="stylesheet" href="/styles/signIn_signUp.css">
+  <link rel="stylesheet" href="/styles/sidebar.css" type="text/css">
+</head>
+
+<body>
+  <%- include("partials/_header.ejs") %>
+
+  <div class="d-flex justify-content-between">
+    <%- include("partials/_sidebar.ejs") %>
+
+    <div class="sign-inUp container register">
+      <h1>REGISTER</h1>
+      <form>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-secondary text-white">Email</span>
+          </div>
+          <input type="text" class="form-control" readonly placeholder="Enter your email ...">
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-secondary text-white">Password</span>
+          </div>
+          <input type="text" class="form-control" readonly placeholder="Enter your password ...">
+        </div>
+
+        <button id="register" type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
+      </form>
+    </div>
+
+    <div></div>
+  </div>
+  <%- include("partials/_footer_scripts.ejs") %>
+</body>
+</html>

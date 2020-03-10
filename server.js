@@ -47,7 +47,7 @@ app.use("/passwords", passwordsRoutes(db));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("createPassword");
 });
 
 app.listen(PORT, () => {

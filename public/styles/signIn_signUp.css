@@ -1,16 +1,31 @@
-.sign-inUp{
+.sign-inUp {
   width: 75%;
-  /* margin: auto; */
   padding: 5%;
   background-color: beige;
   border-radius: 15px;
-  /* border-color: coral; */
-  border: solid coral 5px;
+  border: solid #353a40 5px;
   margin: 0;
-  /* position: absolute; */
-  /* top: 50%;
-  left: 50%; */
-  /* -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); */
 }
 
+#login {
+  background-color: #6db5de;
+  border-color: #6db5de;
+}
+
+.register {
+  background-color: #6db5de;
+}
+
+#register {
+  background-color: #ff8e5a;
+  border-color: #ff8e5a;
+}
+
+.sign-inUp h1 {
+  text-align: center;
+  color: #353a40;
+}
+
+.login {
+  background-color: #ff8e5a;
+}
