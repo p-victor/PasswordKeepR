@@ -11,20 +11,20 @@
 
     <div class="sign-inUp container login">
       <h1>LOGIN</h1>
-      <form>
+      <form action="./login" method="POST">
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text bg-secondary text-white">Email</span>
           </div>
-          <input type="text" class="form-control" readonly placeholder="Enter your email ...">
+          <input class="form-control" type="text" name="email" placeholder="Enter your email ...">
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text bg-secondary text-white">Password</span>
           </div>
-          <input type="text" class="form-control" readonly placeholder="Enter your password ...">
+          <input class="form-control" type="text" name="password" placeholder="Enter your password ...">
         </div>
 
         <button id="login" type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>

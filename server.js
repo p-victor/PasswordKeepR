@@ -12,10 +12,7 @@ const app = express();
 const morgan = require('morgan');
 
 // PG database client/connection setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
-db.connect();
+const dbHelper = require('./public/scripts/database');
 
 // Cookie session setup
 app.use(cookieSession({ name: 'session', keys: ["user_id"], maxAge: 24 * 60 * 60 * 1000 /*24 hours*/ }));
@@ -46,8 +43,8 @@ const usersRoutes = require("./routes/users");
 const passwordsRoutes = require("./routes/passwords");
 
 // Mount all resource routes
-app.use("/users", usersRoutes(db));
-app.use("/passwords", passwordsRoutes(db));
+app.use("/users", usersRoutes(dbHelper));
+app.use("/passwords", passwordsRoutes(dbHelper));
 
 // Home page
 app.get("/", (req, res) => {
