@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/new", (req, res) => {
-    res.render("view");
+    res.render("createPassword");
   });
   router.get("/:pass", (req, res) => {
     const templateVar = {passwordInfo: req.params.pass};
