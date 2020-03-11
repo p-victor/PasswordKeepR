@@ -35,7 +35,7 @@ module.exports = ({ createUserAccount, getUserByEmail }) => {
             phone: null
           })
             .then(query => {
-              res.redirect("/login");
+              res.redirect("/users/login");
             }))
           .catch(e => console.log(e));
       } else {
