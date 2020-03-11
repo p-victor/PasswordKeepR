@@ -3,6 +3,8 @@ const pool = new Pool(require('../lib/db.js'));
 
 pool.connect();
 
+const logQueries =  false;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Searches table App_list : will return the value if found
 // use Truthy (value) or falsy (undefined) as your true or false.
@@ -18,7 +20,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-console.log(res.rows)
+logQueries  ? console.log(res.rows) : null;
 return res.rows});
 };
 exports.findApp = findApp;
@@ -38,7 +40,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-console.log(res.rows)
+logQueries  ? console.log(res.rows) : null;
 return res.rows});
 };
 exports.createApp = createApp;
@@ -54,7 +56,7 @@ const getAllCategories= function(/*no input*/) {
 
 return pool.query(query)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 }
 exports.getAllCategories = getAllCategories;
@@ -76,7 +78,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-console.log(res.rows)
+logQueries  ? console.log(res.rows) : null;
 return res.rows});
 }
 exports.getAppCredentialsbyOwnerId = getAppCredentialsbyOwnerId;
@@ -107,7 +109,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-console.log(res.rows)
+logQueries  ? console.log(res.rows) : null;
 return res.rows});
 }
 exports.getAppCredentialsbyViewerId = getAppCredentialsbyViewerId;
@@ -126,7 +128,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 }
 exports.getUserByEmail = getUserByEmail;
@@ -148,7 +150,7 @@ const createUserAccount = function (userDataObj) {
     ];
   return pool.query(query, values)
   .then(res => {
-    console.log(res.rows)
+    logQueries  ? console.log(res.rows) : null;
     return res.rows});
 };
 exports.createUserAccount = createUserAccount;
@@ -172,7 +174,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 };
 exports.updateUserAccount = updateUserAccount;
@@ -190,7 +192,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 }
 exports.deleteUserAccount = deleteUserAccount;
@@ -213,7 +215,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 };
 exports.createAppCredential = createAppCredential;
@@ -232,7 +234,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 };
 exports.getAppCredentialById = getAppCredentialById;
@@ -257,7 +259,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 };
 exports.updateAppCredentialById = updateAppCredentialById;
@@ -275,7 +277,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 };
 exports.deleteAppCredential = deleteAppCredential;
@@ -298,7 +300,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 
 };
@@ -317,7 +319,7 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 };
 exports.getAppCredentialForUser = getAppCredentialForUSer; */
@@ -342,6 +344,6 @@ const values = [
   ];
 return pool.query(query, values)
 .then(res => {
-  console.log(res.rows)
+  logQueries  ? console.log(res.rows) : null;
   return res.rows});
 */
