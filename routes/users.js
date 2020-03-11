@@ -35,8 +35,7 @@ module.exports = ({ createUserAccount, getUserByEmail }) => {
             phone: null
           })
             .then(query => {
-              req.session.user_id = query.id;
-              res.redirect("/");
+              res.redirect("/login");
             }))
           .catch(e => console.log(e));
       } else {

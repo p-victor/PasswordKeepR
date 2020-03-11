@@ -3,7 +3,7 @@ const router = express.Router();
 const { generatePassword } = require("../public/scripts/generatePassword")
 const { stripUrlToDomain } = require("../public/scripts/stripUrlToDomain")
 
-module.exports = ({createAppCredential, findApp, createApp, getAppCredentialById, findAppById}) => {
+module.exports = ({ createAppCredential, findApp, createApp, getAppCredentialById, findAppById, getAppCredentialByOwnerId, getAppCredentialByViewerId }) => {
   router.get("/new", (req, res) => {
     res.render("createPassword");
 
@@ -12,10 +12,10 @@ module.exports = ({createAppCredential, findApp, createApp, getAppCredentialById
 
 
 
-    let obj = {id: req.params.passId}
+    let obj = { id: req.params.passId }
     getAppCredentialById(obj)
-    .then(data => {
-        const templateVar = {passwordInfo: data[0]}
+      .then(data => {
+        const templateVar = { passwordInfo: data[0] }
 
 
         let appId = data[0].app_id
@@ -26,7 +26,7 @@ module.exports = ({createAppCredential, findApp, createApp, getAppCredentialById
             console.log(data)
             templateVar.appName = data[0].name;
             res.render("passwords", templateVar)
-            })
+          })
       })
   });
   router.post("/new", (req, res) => {
@@ -63,7 +63,7 @@ module.exports = ({createAppCredential, findApp, createApp, getAppCredentialById
 
   router.post("/:pass/share/:user", (req, res) => {
     //update the password
-
+    getAppCredentialByOwnerId(req.session.user_id)
   });
   return router;
 };
