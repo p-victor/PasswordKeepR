@@ -7,6 +7,48 @@ const logQueries = false;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+const createAppCredentialForViewer = function (AppCredentialId_var, ViewerName_var) {
+  const query = `
+    INSERT INTO shared_access (credential_id, user_id)
+    VALUES ($1, $2)
+  ;
+`;
+const values = [
+`${AppCredentialId_var}`,
+`${ViewerName_var}`
+];
+return pool.query(query, values)
+.then(res => {
+logQueries  ? console.log(res.rows) : null;
+return res.rows});
+};
+exports.createAppCredentialForViewer = createAppCredentialForViewer;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const AllsharedByAppCredential = function(AppCredentialId_var) {
+
+  const query = `
+  SELECT
+  users.id AS viewer_id,
+  users.name AS viewer_name
+  FROM users
+  JOIN shared_access ON shared_access.user_id = users.id
+  WHERE shared_access.credential_id = $1
+  ;
+  `;
+  const values = [
+    `${AppCredentialId_var}`
+  ];
+  return pool.query(query, values)
+  .then(res => {
+    logQueries  ? console.log(res.rows) : null;
+    return res.rows});
+  };
+  exports.AllsharedByAppCredential = AllsharedByAppCredential;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 const findAppById = function(appId_var) {
   const query = `
     SELECT *
