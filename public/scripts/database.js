@@ -29,6 +29,7 @@ const createApp = function(strippedDomain_var, stringURL) {
   const query = `
   INSERT INTO app_list (name, domain)
   VALUES ($1, $2)
+  RETURNING *
   ;
 `;
 const values = [
