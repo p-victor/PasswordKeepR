@@ -6,6 +6,25 @@ pool.connect();
 const logQueries = false;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const findAppById = function(appId_var) {
+  const query = `
+    SELECT *
+    FROM app_list
+    WHERE app_list.id = $1
+  ;
+`;
+const values = [
+`${appId_var}`
+];
+return pool.query(query, values)
+.then(res => {
+logQueries  ? console.log(res.rows) : null;
+return res.rows});
+}
+exports.findAppById = findAppById;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Searches table App_list : will return the value if found
 // use Truthy (value) or falsy (undefined) as your true or false.
 const findApp = function(strippedDomain_var) {
@@ -24,6 +43,8 @@ logQueries  ? console.log(res.rows) : null;
 return res.rows});
 };
 exports.findApp = findApp;
+
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // This function does not support inserting a app_list.photo_url
