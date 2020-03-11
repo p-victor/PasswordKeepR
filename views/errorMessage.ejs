@@ -1,0 +1,20 @@
+<%- include("partials/_basic_html_setup.ejs") %>
+<link rel="stylesheet" href="/styles/signIn_signUp.css">
+<link rel="stylesheet" href="/styles/sidebar.css" type="text/css">
+<link rel="stylesheet" href="/styles/errorMessage.css" type="text/css">
+</head>
+
+<body>
+<%- include("partials/_header.ejs") %>
+
+<div class="d-flex justify-content-between">
+  <%- include("partials/_sidebar.ejs") %>
+
+<div class="errorMessage">
+  <h1>Error!</h1>
+  <p>This is an error message</p>
+</div>
+<div></div>
+<%- include("partials/_footer_scripts.ejs") %>
+</body>
+</html>
