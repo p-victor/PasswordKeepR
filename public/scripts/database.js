@@ -63,9 +63,12 @@ exports.getAllCategories = getAllCategories;
 
 const getAppCredentialsbyOwnerId = function(ownerId_var) {
   const query = `
-    SELECT *
+    SELECT
+    app_credentials.*,
+    app_list.name AS app_list_name
     FROM app_credentials
-    WHERE owner_id = $1
+    JOIN app_list ON app_list.id = app_credentials.app_id
+    WHERE app_credentials.owner_id = $1
   ;
 `;
 const values = [
