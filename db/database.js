@@ -3,7 +3,7 @@ const pool = new Pool(require('../lib/db.js'));
 
 pool.connect();
 
-const logQueries =  false;
+const logQueries = false;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Searches table App_list : will return the value if found
