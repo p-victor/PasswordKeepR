@@ -14,8 +14,6 @@ module.exports = ({createAppCredential, findApp, createApp}) => {
   });
   router.post("/new", (req, res) => {
     //create new password
-    console.log(req.body)
-    console.log("this is the COOKIE!!!! ====>", req.session.user_id)
 
     let userObj = {id: req.session.user_id}
     let appObj = {}
@@ -44,23 +42,21 @@ module.exports = ({createAppCredential, findApp, createApp}) => {
     }
 
     let domainName = stripUrlToDomain(req.body.website_url);
-    console.log("this is the domain ====>", domainName);
+    // console.log("this is the domain ====>", domainName);
+    // www.gsadasdsa.com
     findApp(domainName)
       .then(data => {
+        if (data[0]) {
         appObj.id = data[0].id
-        if (appObj.id) {
           createAppCredential(userObj, appCred, appObj, category);
         } else {
           createApp(domainName, req.body.website_url)
             .then(data => {
-              console.log("I MADE IT !!!!!!")
               appObj.id = data[0].id
               createAppCredential(userObj, appCred, appObj, category)
             })
         }
       })
-
-      console.log("this is create app crednetial ====>", createApp(domainName, req.body.website_url).then(data => console.log(data)))
 
     res.redirect('./new');
   });
