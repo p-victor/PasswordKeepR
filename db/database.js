@@ -99,11 +99,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-<<<<<<< HEAD
 logQueries  ? console.log(res.rows) : null;
-=======
-// console.log(res.rows)
->>>>>>> webpage/password-view
 return res.rows});
 }
 exports.getAppCredentialsbyOwnerId = getAppCredentialsbyOwnerId;
@@ -134,11 +130,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-<<<<<<< HEAD
 logQueries  ? console.log(res.rows) : null;
-=======
-// console.log(res.rows)
->>>>>>> webpage/password-view
 return res.rows});
 }
 exports.getAppCredentialsbyViewerId = getAppCredentialsbyViewerId;
