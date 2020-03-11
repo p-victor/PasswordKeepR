@@ -3,7 +3,7 @@ const router = express.Router();
 const { generatePassword } = require("../public/scripts/generatePassword")
 const { stripUrlToDomain } = require("../public/scripts/stripUrlToDomain")
 
-module.exports = ({createAppCredential}) => {
+module.exports = ({createAppCredential, findApp, createApp}) => {
   router.get("/new", (req, res) => {
     res.render("createPassword");
 
@@ -15,9 +15,10 @@ module.exports = ({createAppCredential}) => {
   router.post("/new", (req, res) => {
     //create new password
     console.log(req.body)
+    console.log("this is the COOKIE!!!! ====>", req.session.user_id)
 
-    let userObj = {id: 1}
-    let appObj = {id: 1}
+    let userObj = {id: req.session.user_id}
+    let appObj = {}
 
     let uppercase;
     let spChar;
@@ -37,17 +38,30 @@ module.exports = ({createAppCredential}) => {
       category.id = 3
     }
 
-    // let appObj = {id: 0};
-    let domainName = stripUrlToDomain(req.body.website_url);
-    console.log("this is the domain ====>", domainName);
-    // wait for hatem to make the functions so that i can search domain exists in app_list
-
     let appCred = {
       username: req.body.username,
       password: generatePassword(uppercase, req.body.length, spChar, numbers)
     }
 
-    createAppCredential(userObj, appCred, appObj, category);
+    let domainName = stripUrlToDomain(req.body.website_url);
+    console.log("this is the domain ====>", domainName);
+    findApp(domainName)
+      .then(data => {
+        appObj.id = data[0].id
+        if (appObj.id) {
+          createAppCredential(userObj, appCred, appObj, category);
+        } else {
+          createApp(domainName, req.body.website_url)
+            .then(data => {
+              console.log("I MADE IT !!!!!!")
+              appObj.id = data[0].id
+              createAppCredential(userObj, appCred, appObj, category)
+            })
+        }
+      })
+
+      console.log("this is create app crednetial ====>", createApp(domainName, req.body.website_url).then(data => console.log(data)))
+
     res.redirect('./new');
   });
   router.post("/:pass/update", (req, res) => {

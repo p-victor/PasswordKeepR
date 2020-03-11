@@ -5,8 +5,8 @@ VALUES
 (3, 'youtube', 'https://www.youtube.com/'),
 (4, 'instagram', 'https://www.instagram.com/'),
 (5, 'google', 'https://www.google.com'),
-(6, 'bamboo', 'https://www.bamboohr.com/'),
-(7, 'harvest', 'https://www.getharvest.com/'),
+(6, 'bamboohr', 'https://www.bamboohr.com/'),
+(7, 'getharvest', 'https://www.getharvest.com/'),
 (8, 'linkedin', 'https://www.linkedin.com/'),
 (9, 'snapchat', 'https://www.snapchat.com/'),
 (10, 'reddit', 'https://www.reddit.com/');
