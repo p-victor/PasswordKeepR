@@ -3,14 +3,31 @@ const router = express.Router();
 const { generatePassword } = require("../public/scripts/generatePassword")
 const { stripUrlToDomain } = require("../public/scripts/stripUrlToDomain")
 
-module.exports = ({ createAppCredential, findApp, createApp }) => {
+module.exports = ({createAppCredential, findApp, createApp, getAppCredentialById, findAppById}) => {
   router.get("/new", (req, res) => {
     res.render("createPassword");
 
   });
-  router.get("/:pass", (req, res) => {
-    const templateVar = { passwordInfo: req.params.pass };
-    res.render("passwords", templateVar);
+  router.get("/:passId", (req, res) => {
+
+
+
+    let obj = {id: req.params.passId}
+    getAppCredentialById(obj)
+    .then(data => {
+        const templateVar = {passwordInfo: data[0]}
+
+
+        let appId = data[0].app_id
+
+        return findAppById(appId)
+          .then(data => {
+            console.log("heyyyyyyyyyy")
+            console.log(data)
+            templateVar.appName = data[0].name;
+            res.render("passwords", templateVar)
+            })
+      })
   });
   router.post("/new", (req, res) => {
     //create new password
