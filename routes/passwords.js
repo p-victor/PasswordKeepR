@@ -20,18 +20,23 @@ module.exports = ({ createAppCredential, findApp, createApp }) => {
     let uppercase = !req.body.uppercase ? false : true;
     let spChar = !req.body.spChar ? false : true;
     let numbers = !req.body.numbers ? false : true;
-    const category = {id: ["uncategorized", "social", "entertainment", "work"].indexOf(req.body.category)};
+    const category = { id: ["uncategorized", "social", "entertainment", "work"].indexOf(req.body.category) };
     let appCred = {
       username: req.body.username,
       password: generatePassword(uppercase, req.body.length, spChar, numbers)
     }
     const appName = req.body.app_name;
     findApp(appName)
-    .then(data => {
-      data[0] ?
-          createAppCredential(userObj, appCred, {id: data[0].id}, category) : createApp(appName, req.body.website_url).then(app => createAppCredential(userObj, appCred, {id: app.id}, category))
+      .then(data => {
+        if (data[0]) {
+          createAppCredential(userObj, appCred, { id: data[0].id }, category)
+            .catch(console.log("createAppCredential failed"));
+        } else {
+          createApp(appName, req.body.website_url)
+            .then(app => createAppCredential(userObj, appCred, { id: app.id }, category).catch(console.log("createAppCredential failed")))
+            .catch(console.log("createApp failed"));
+        }
       }).catch(e => console.log(e))
-
     res.redirect('./new');
   });
   router.post("/:pass/update", (req, res) => {
