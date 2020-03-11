@@ -12,7 +12,7 @@ const app = express();
 const morgan = require('morgan');
 
 // PG database client/connection setup
-const dbHelper = require('./public/scripts/database');
+const dbHelper = require('./db/database');
 
 // Cookie session setup
 app.use(cookieSession({ name: 'session', keys: ["user_id"], maxAge: 24 * 60 * 60 * 1000 /*24 hours*/ }));
@@ -50,7 +50,7 @@ const sidebarRoutes = require("./routes/sidebar");
 // Mount all resource routes
 app.use("/users", usersRoutes(dbHelper));
 app.use("/passwords", passwordsRoutes(dbHelper));
-app.use("/api/", sidebarRoutes(dbHelper));
+app.use("/api", sidebarRoutes(dbHelper));
 
 // Home page
 app.get("/", (req, res) => {
