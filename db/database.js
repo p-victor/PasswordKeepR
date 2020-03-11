@@ -3,6 +3,25 @@ const pool = new Pool(require('../lib/db.js'));
 
 pool.connect();
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+const findAppById = function(appId_var) {
+  const query = `
+    SELECT *
+    FROM app_list
+    WHERE app_list.id = $1
+  ;
+`;
+const values = [
+`${appId_var}`
+];
+return pool.query(query, values)
+.then(res => {
+console.log(res.rows);
+return res.rows});
+}
+exports.findAppById = findAppById;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Searches table App_list : will return the value if found
 // use Truthy (value) or falsy (undefined) as your true or false.
@@ -76,7 +95,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-console.log(res.rows)
+// console.log(res.rows)
 return res.rows});
 }
 exports.getAppCredentialsbyOwnerId = getAppCredentialsbyOwnerId;
@@ -107,7 +126,7 @@ const values = [
 ];
 return pool.query(query, values)
 .then(res => {
-console.log(res.rows)
+// console.log(res.rows)
 return res.rows});
 }
 exports.getAppCredentialsbyViewerId = getAppCredentialsbyViewerId;
