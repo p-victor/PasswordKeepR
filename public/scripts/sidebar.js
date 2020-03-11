@@ -9,10 +9,7 @@ $(document).ready(function () {
       <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#${category.name}" role="button" aria-expanded="false" aria-controls="collapseExample">${category.name}</a>
         <div class="collapse" id="${category.name}">
         <ul class="list-group bg-secondary">`;
-        console.log(category.id);
-        console.log(data[1]);
         currentCategoryCredentials = data[1][0].filter(credential => credential.category_id === category.id);
-        console.log(currentCategoryCredentials);
         currentCategoryCredentials.forEach(credential => {
           stringBuilder += `
           <li class="list-group-item bg-secondary">
