@@ -4,6 +4,111 @@ const pool = new Pool(require('../../lib/db.js'));
 pool.connect();
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// Searches table App_list : will return the value if found
+// use Truthy (value) or falsy (undefined) as your true or false.
+const findApp = function(strippedDomain_var) {
+  const query = `
+      SELECT *
+      FROM app_list
+      WHERE name = $1
+  ;
+`;
+const values = [
+`${strippedDomain_var}`
+];
+return pool.query(query, values)
+.then(res => {
+console.log(res.rows)
+return res.rows});
+};
+exports.findApp = findApp;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// This function does not support inserting a app_list.photo_url
+const createApp = function(strippedDomain_var, stringURL) {
+  const query = `
+  INSERT INTO app_list (name, domain)
+  VALUES ($1, $2)
+  ;
+`;
+const values = [
+`${strippedDomain_var}`,
+`${stringURL}`
+];
+return pool.query(query, values)
+.then(res => {
+console.log(res.rows)
+return res.rows});
+};
+exports.createApp = createApp;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const getAllCategories= function(/*no input*/) {
+  const query = `
+      SELECT *
+      FROM categories
+    ;
+  `;
+
+return pool.query(query)
+.then(res => {
+  console.log(res.rows)
+  return res.rows});
+}
+exports.getAllCategories = getAllCategories;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const getAppCredentialsbyOwnerId = function(ownerId_var) {
+  const query = `
+    SELECT *
+    FROM app_credentials
+    WHERE owner_id = $1
+  ;
+`;
+const values = [
+`${ownerId_var}`
+];
+return pool.query(query, values)
+.then(res => {
+console.log(res.rows)
+return res.rows});
+}
+exports.getAppCredentialsbyOwnerId = getAppCredentialsbyOwnerId;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const getAppCredentialsbyViewerId = function(viewerId_var) {
+  const query = `
+    SELECT
+    shared_access.id AS shared_access_id,
+    shared_access.user_id AS shared_access_viewer_id,
+    users.name AS user_name,
+    shared_access.credential_id AS shared_access_credential_id,
+    app_credentials.username AS app_credentials_username,
+    app_credentials.password AS app_credentials_password,
+    app_list.name AS app_list_name,
+    app_list.domain AS app_list_domain
+    FROM shared_access
+    JOIN users ON shared_access.user_id = users.id
+    JOIN app_credentials ON shared_access.credential_id = app_credentials.id
+    JOIN app_list ON app_list.id = app_credentials.app_id
+
+    WHERE shared_access.user_id = $1
+  ;
+`;
+const values = [
+`${viewerId_var}`
+];
+return pool.query(query, values)
+.then(res => {
+console.log(res.rows)
+return res.rows});
+}
+exports.getAppCredentialsbyViewerId = getAppCredentialsbyViewerId;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 const getUserByEmail = function(email) {
   const query = `
@@ -185,7 +290,7 @@ const getAppCredentialbyViewerEmail = function(viewerEmail) {
   ;
 `;
 const values = [
-  `${email}`
+  `${viewerEmail}`
   ];
 return pool.query(query, values)
 .then(res => {
