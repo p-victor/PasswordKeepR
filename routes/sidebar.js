@@ -4,7 +4,7 @@ const { verifyLoginInfo, verifyRegisterInfo } = require('../public/scripts/helpe
 
 module.exports = ({ getAppCredentialsbyViewerId, getAppCredentialsbyOwnerId, getAllCategories }) => {
   router.get("/sidebar", (req, res) => {
-    console.log(`connected as user: ${req.session.user_id}`);
+    // console.log(req.session.user_id);
     const id = req.session.user_id;
     Promise.all([ getAppCredentialsbyOwnerId(id), getAppCredentialsbyViewerId(id)])
     .then(userAppCredentialsList => res.send(userAppCredentialsList)).catch(e => console.log("API couldnt get sidebar info"));
