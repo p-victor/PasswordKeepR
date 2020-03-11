@@ -14,5 +14,4 @@ function stripUrlToDomain(urlString) {
   return outputDomain;
 }
 
-// console.log(stripUrlToDomain("http://www.google.com"))
 module.exports = { stripUrlToDomain }

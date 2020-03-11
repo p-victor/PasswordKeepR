@@ -6,10 +6,10 @@ $(document).ready(function () {
       data[0].forEach(category => {
         stringBuilder += `
         <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#${category.name}" role="button" aria-expanded="false" aria-controls="collapseExample">${category.name}</a>
+        <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#${category.name}" role="button" aria-expanded="false" aria-controls="collapseExample">${category.name}</a>
         <div class="collapse" id="${category.name}">
         <ul class="list-group bg-secondary">`;
-        currentCategoryCredentials = data[1][0].filter(credential => credential.category_id === category.id);
+        const currentCategoryCredentials = data[1][0].filter(credential => credential.category_id === category.id);
         currentCategoryCredentials.forEach(credential => {
           stringBuilder += `
           <li class="list-group-item bg-secondary">
@@ -19,7 +19,7 @@ $(document).ready(function () {
         stringBuilder += `</ul></div></li>`;
       });
       $("#category-container").prepend(stringBuilder);
-    });
+    }).catch(e => console.log("UUUUUUUUUUUUUUUUUUUUUU"));
 });
 
 

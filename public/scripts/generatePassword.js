@@ -71,7 +71,6 @@ function checkValidPassword(passwordArr, uppercase, spChar, num) {
   }
 }
 
-// console.log(generatePassword(true, 10, true, true));
 module.exports = { generatePassword }
 
 

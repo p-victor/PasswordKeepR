@@ -42,7 +42,6 @@ module.exports = ({createAppCredential, findApp, createApp}) => {
     }
 
     let domainName = stripUrlToDomain(req.body.website_url);
-    // console.log("this is the domain ====>", domainName);
     // www.gsadasdsa.com
     findApp(domainName)
       .then(data => {
