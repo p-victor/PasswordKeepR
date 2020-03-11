@@ -1,0 +1,7 @@
+.errorMessage {
+  width: 75%;
+  padding: 5%;
+  background-color: pink;
+  border-radius: 15px;
+  border: solid red 5px;
+}
