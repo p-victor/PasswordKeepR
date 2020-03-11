@@ -60,5 +60,10 @@ module.exports = ({createAppCredential, findApp, createApp, getAppCredentialById
     //update the password
 
   });
+
+  router.post("/:pass/share/:user", (req, res) => {
+    //update the password
+
+  });
   return router;
 };

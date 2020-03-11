@@ -29,3 +29,11 @@
 .login {
   background-color: #ff8e5a;
 }
+
+h4 {
+  margin: 2rem 0rem 1rem;
+}
+
+td, th {
+  vertical-align: middle;
+}
