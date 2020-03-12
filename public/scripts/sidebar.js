@@ -18,8 +18,20 @@ $(document).ready(function () {
         })
         stringBuilder += `</ul></div></li>`;
       });
+      stringBuilder += `
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#shared" role="button" aria-expanded="false" aria-controls="collapseExample">shared</a>
+      <div class="collapse" id="shared">
+      <ul class="list-group bg-secondary">`;
+      data[1][1].forEach(shared => {
+        stringBuilder += `
+          <li class="list-group-item bg-secondary">
+          <a href="/passwords/${shared.shared_access_credential_id} ">
+          ${shared.user_name}: ${shared.app_list_name}</a></li>`;
+      })
+      stringBuilder += `</ul></div></li>`;
       $("#category-container").prepend(stringBuilder);
-    }).catch(e => console.log("UUUUUUUUUUUUUUUUUUUUUU"));
+    }).catch(e => console.log("Error loading sidebar"));
 });
 
 
