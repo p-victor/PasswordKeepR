@@ -69,9 +69,9 @@ Our Database contains 5 tables:
 | app_credentials | these are the credentials (username/password) entity that are being shared accross users for a certain app.
 | shared_access   | a middle/bridge table to associate app_credentials to other users, refered to as "viewers".
 |
-
+Screenshots/PasswordKeepR_database_ERD.png
 ### Database ERD 
-![Database ERD](https://github.com/p-victor/PasswordKeepR/blob/master/Screenshots/PasswordKeepR_database_ERD.png?raw=true"Database ERD")
+![Database ERD](https://github.com/p-victor/PasswordKeepR/blob/master/Screenshots/PasswordKeepR_database_ERD.png?raw=true "Database ERD")
 Github link of this image shall be here 
 
 
