@@ -49,7 +49,7 @@ const AllsharedByAppCredential = function(AppCredentialId_var) {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const revokeAccessOfOneViewerByCredentialId = function(AppCredentialId, viewerName) {
+const revokeAccessOfOneViewerByAppCredentialId = function(AppCredentialId, viewerName) {
   const query = `
   DELETE FROM shared_access
   WHERE shared_access.credential_id = $1
@@ -70,7 +70,8 @@ return pool.query(query, values)
 logQueries  ? console.log(res.rows) : null;
 return res.rows});
 }
-exports.revokeAccessOfOneViewerByCredentialId = revokeAccessOfOneViewerByCredentialId;
+exports.revokeAccessOfOneViewerByAppCredentialId = revokeAccessOfOneViewerByAppCredentialId;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 const findAppById = function(appId_var) {
