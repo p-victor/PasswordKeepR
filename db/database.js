@@ -287,9 +287,10 @@ exports.createAppCredential = createAppCredential;
 
 const getAppCredentialById = function(AppCredentialObj) {
   const query = `
-    SELECT *
+    SELECT app_credentials.*, app_list.name
     FROM app_credentials
-    WHERE id = $1
+    JOIN app_list ON app_list.id = app_credentials.app_id
+    WHERE app_credentials.id = $1
   ;
 `;
 const values = [
