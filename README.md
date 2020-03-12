@@ -71,7 +71,7 @@ Our Database contains 5 tables:
 |
 
 ### Database ERD 
-![Database ERD](/assets/images/philly-magic-gardens.jpg "Database ERD")
+![Database ERD](https://github.com/p-victor/PasswordKeepR/blob/master/Screenshots/PasswordKeepR_database_ERD.png?raw=true"Database ERD")
 Github link of this image shall be here 
 
 
