@@ -29,7 +29,7 @@ module.exports = ({ createUserAccount, getUserByEmail }) => {
       if (verifyRegisterInfo(req.body.email, req.body.password, query[0])) {
         bcrypt.hash(req.body.password, 10)
           .then(hashedPassword => createUserAccount({
-            name: "name",
+            name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
             phone: null

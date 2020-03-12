@@ -6,7 +6,6 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
-const sass = require("node-sass-middleware");
 const cookieSession = require('cookie-session');
 const app = express();
 const morgan = require('morgan');
@@ -26,31 +25,26 @@ app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//#########login middleware
-// app.use((req, res, next) => {
-//   const allowedPaths = ['/users/signin', '/users/signup']
-//   if ( req.session.user_id || allowedPaths.some(allowedPath => req.path.startsWith(allowedPath))) {
-//     next();
-//   }
-//   else {
-//     res.redirect('/users/signin');
-//   }
-// });
-
-// app.get((req, res) => {
-//   res.session.user_id;
-// })
+app.use((req, res, next) => {
+  const allowedPaths = ['/users/login', '/users/register']
+  if ( req.session.user_id || allowedPaths.some(allowedPath => req.path.startsWith(allowedPath))) {
+    next();
+  }
+  else {
+    res.redirect('/users/login');
+  }
+});
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const passwordsRoutes = require("./routes/passwords");
-const sidebarRoutes = require("./routes/sidebar");
+const apiRoutes = require("./routes/api");
 
 // Mount all resource routes
 app.use("/users", usersRoutes(dbHelper));
 app.use("/passwords", passwordsRoutes(dbHelper));
-app.use("/api", sidebarRoutes(dbHelper));
+app.use("/api", apiRoutes(dbHelper));
 
 // Home page
 app.get("/", (req, res) => {

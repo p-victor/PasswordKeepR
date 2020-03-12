@@ -1,6 +1,6 @@
-  <%- include("partials/_basic_html_setup.ejs") %>
-  <link rel="stylesheet" href="/styles/signIn_signUp.css">
-  <link rel="stylesheet" href="/styles/sidebar.css" type="text/css">
+<%- include("partials/_basic_html_setup.ejs") %>
+<link rel="stylesheet" href="/styles/signIn_signUp.css">
+<link rel="stylesheet" href="/styles/sidebar.css" type="text/css">
 </head>
 
 <body>
@@ -14,18 +14,22 @@
       <form action="./register" method="POST">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
+            <span class="input-group-text bg-secondary text-white">Name</span>
+          </div>
+          <input class="form-control" type="text" name="name" placeholder="Enter your name ...">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
             <span class="input-group-text bg-secondary text-white">Email</span>
           </div>
-          <input class="form-control"  type="text" name="email" placeholder="Enter your email ...">
+          <input class="form-control" type="text" name="email" placeholder="Enter your email ...">
         </div>
-
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text bg-secondary text-white">Password</span>
           </div>
           <input class="form-control" type="password" name="password" placeholder="Enter your password ...">
         </div>
-
         <button id="register" type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
       </form>
     </div>
@@ -34,4 +38,5 @@
   </div>
   <%- include("partials/_footer_scripts.ejs") %>
 </body>
+
 </html>

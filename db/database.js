@@ -13,20 +13,21 @@ const createAppCredentialForViewer = function (AppCredentialId_var, ViewerName_v
     VALUES ($1, $2)
   ;
 `;
-const values = [
-`${AppCredentialId_var}`,
-`${ViewerName_var}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${AppCredentialId_var}`,
+    `${ViewerName_var}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.createAppCredentialForViewer = createAppCredentialForViewer;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const AllsharedByAppCredential = function(AppCredentialId_var) {
+const AllsharedByAppCredential = function (AppCredentialId_var) {
 
   const query = `
   SELECT
@@ -41,15 +42,16 @@ const AllsharedByAppCredential = function(AppCredentialId_var) {
     `${AppCredentialId_var}`
   ];
   return pool.query(query, values)
-  .then(res => {
-    logQueries  ? console.log(res.rows) : null;
-    return res.rows});
-  };
-  exports.AllsharedByAppCredential = AllsharedByAppCredential;
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
+};
+exports.AllsharedByAppCredential = AllsharedByAppCredential;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const revokeAccessOfOneViewerByAppCredentialId = function(AppCredentialId, viewerName) {
+const revokeAccessOfOneViewerByAppCredentialId = function (AppCredentialId, viewerName) {
   const query = `
   DELETE FROM shared_access
   WHERE shared_access.credential_id = $1
@@ -61,53 +63,56 @@ const revokeAccessOfOneViewerByAppCredentialId = function(AppCredentialId, viewe
   ;
   `;
 
-const values = [
-`${AppCredentialId}`,
-`${viewerName}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${AppCredentialId}`,
+    `${viewerName}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.revokeAccessOfOneViewerByAppCredentialId = revokeAccessOfOneViewerByAppCredentialId;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const findAppById = function(appId_var) {
+const findAppById = function (appId_var) {
   const query = `
     SELECT *
     FROM app_list
     WHERE app_list.id = $1
   ;
 `;
-const values = [
-`${appId_var}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${appId_var}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.findAppById = findAppById;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Searches table App_list : will return the value if found
 // use Truthy (value) or falsy (undefined) as your true or false.
-const findApp = function(strippedDomain_var) {
+const findApp = function (strippedDomain_var) {
   const query = `
       SELECT *
       FROM app_list
       WHERE name = $1
   ;
 `;
-const values = [
-`${strippedDomain_var}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${strippedDomain_var}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.findApp = findApp;
 
@@ -115,43 +120,45 @@ exports.findApp = findApp;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // This function does not support inserting a app_list.photo_url
-const createApp = function(strippedDomain_var, stringURL) {
+const createApp = function (strippedDomain_var, stringURL) {
   const query = `
   INSERT INTO app_list (name, domain)
   VALUES ($1, $2)
   RETURNING *
   ;
 `;
-const values = [
-`${strippedDomain_var}`,
-`${stringURL}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${strippedDomain_var}`,
+    `${stringURL}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.createApp = createApp;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getAllCategories= function(/*no input*/) {
+const getAllCategories = function (/*no input*/) {
   const query = `
       SELECT *
       FROM categories
     ;
   `;
 
-return pool.query(query)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.getAllCategories = getAllCategories;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getAppCredentialsbyOwnerId = function(ownerId_var) {
+const getAppCredentialsbyOwnerId = function (ownerId_var) {
   const query = `
     SELECT
     app_credentials.*,
@@ -161,101 +168,105 @@ const getAppCredentialsbyOwnerId = function(ownerId_var) {
     WHERE app_credentials.owner_id = $1
   ;
 `;
-const values = [
-`${ownerId_var}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${ownerId_var}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.getAppCredentialsbyOwnerId = getAppCredentialsbyOwnerId;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getAppCredentialsbyViewerId = function(viewerId_var) {
+const getAppCredentialsbyViewerId = function (viewerId_var) {
   const query = `
-    SELECT
-    shared_access.id AS shared_access_id,
-    shared_access.user_id AS shared_access_viewer_id,
-    users.name AS user_name,
-    shared_access.credential_id AS shared_access_credential_id,
-    app_credentials.username AS app_credentials_username,
-    app_credentials.password AS app_credentials_password,
-    app_list.name AS app_list_name,
-    app_list.domain AS app_list_domain
-    FROM shared_access
-    JOIN users ON shared_access.user_id = users.id
-    JOIN app_credentials ON shared_access.credential_id = app_credentials.id
-    JOIN app_list ON app_list.id = app_credentials.app_id
-
-    WHERE shared_access.user_id = $1
+  SELECT
+  shared_access.id AS shared_access_id,
+  shared_access.user_id AS shared_access_viewer_id,
+  users.name AS user_name,
+  shared_access.credential_id AS shared_access_credential_id,
+  app_credentials.username AS app_credentials_username,
+  app_credentials.password AS app_credentials_password,
+  app_list.name AS app_list_name,
+  app_list.domain AS app_list_domain
+  FROM shared_access
+  JOIN app_credentials ON shared_access.credential_id = app_credentials.id
+  JOIN app_list ON app_list.id = app_credentials.app_id
+  JOIN users ON app_credentials.owner_id = users.id
+  WHERE shared_access.user_id = $1
   ;
 `;
-const values = [
-`${viewerId_var}`
-];
-return pool.query(query, values)
-.then(res => {
-logQueries  ? console.log(res.rows) : null;
-return res.rows});
+  const values = [
+    `${viewerId_var}`
+  ];
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.getAppCredentialsbyViewerId = getAppCredentialsbyViewerId;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getUserByName = function(name) {
+const getUserByName = function (name) {
   const query = `
     SELECT *
     FROM users
     WHERE name = $1
     ;
   `;
-const values = [
-  `${name}`
+  const values = [
+    `${name}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.getUserByName = getUserByName;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getUserById = function(id) {
+const getUserById = function (id) {
   const query = `
     SELECT *
     FROM users
     WHERE id = $1
     ;
   `;
-const values = [
-  `${id}`
+  const values = [
+    `${id}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.getUserById = getUserById;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getUserByEmail = function(email) {
+const getUserByEmail = function (email) {
   const query = `
     SELECT *
     FROM users
     WHERE email = $1
     ;
   `;
-const values = [
-  `${email}`
+  const values = [
+    `${email}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.getUserByEmail = getUserByEmail;
 
@@ -273,17 +284,18 @@ const createUserAccount = function (userDataObj) {
     `${userDataObj.email}`,
     `${userDataObj.password}`,
     `${userDataObj.phone}`
-    ];
+  ];
   return pool.query(query, values)
-  .then(res => {
-    logQueries  ? console.log(res.rows) : null;
-    return res.rows});
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.createUserAccount = createUserAccount;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const updateUserAccount = function(userAccountId, columnName, columnValue) {
+const updateUserAccount = function (userAccountId, columnName, columnValue) {
   // columnName can be of the following values:
   // 'name', 'email', 'password', or 'phone'
   const query = `
@@ -293,62 +305,65 @@ const updateUserAccount = function(userAccountId, columnName, columnValue) {
     WHERE id = $1
     ;
   `;
-const values = [
-  `${userAccountId}`,
-  `${columnName}`,
-  `${columnValue}`
+  const values = [
+    `${userAccountId}`,
+    `${columnName}`,
+    `${columnValue}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.updateUserAccount = updateUserAccount;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const deleteUserAccount = function(userAccountId) {
+const deleteUserAccount = function (userAccountId) {
   const query = `
     DELETE FROM users
     WHERE id = $1
     ;
   `;
-const values = [
-  `${userAccountId}`
+  const values = [
+    `${userAccountId}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 }
 exports.deleteUserAccount = deleteUserAccount;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const createAppCredential = function(userDataObj, appCredentialsObj, appObj, categoryObj) {
+const createAppCredential = function (userDataObj, appCredentialsObj, appObj, categoryObj) {
   const query = `
     INSERT INTO app_credentials(username, password, owner_id, app_id, category_id)
     VALUES
     ($1, $2, $3, $4, $5)
   ;
 `;
-const values = [
-  `${appCredentialsObj.username}`,
-  `${appCredentialsObj.password}`,
-  `${userDataObj.id}`,
-  `${appObj.id}`,
-  `${categoryObj.id}`
+  const values = [
+    `${appCredentialsObj.username}`,
+    `${appCredentialsObj.password}`,
+    `${userDataObj.id}`,
+    `${appObj.id}`,
+    `${categoryObj.id}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.createAppCredential = createAppCredential;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getAppCredentialById = function(AppCredentialObj) {
+const getAppCredentialById = function (AppCredentialObj) {
   const query = `
     SELECT app_credentials.*, app_list.name AS app_list_name
     FROM app_credentials
@@ -356,13 +371,14 @@ const getAppCredentialById = function(AppCredentialObj) {
     WHERE app_credentials.id = $1
   ;
 `;
-const values = [
-  `${AppCredentialObj.id}`
+  const values = [
+    `${AppCredentialObj.id}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.getAppCredentialById = getAppCredentialById;
 
@@ -379,15 +395,16 @@ const updateAppCredentialById = function (appCredentialId, columnName, columnVal
     WHERE id = $1
   ;
 `;
-const values = [
-  `${appCredentialId}`,
-  `${columnName}`,
-  `${columnValue}`
+  const values = [
+    `${appCredentialId}`,
+    `${columnName}`,
+    `${columnValue}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.updateAppCredentialById = updateAppCredentialById;
 
@@ -399,19 +416,20 @@ const deleteAppCredential = function (credentialId) {
     WHERE id = $1
   ;
 `;
-const values = [
-  `${credentialId}`
+  const values = [
+    `${credentialId}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 };
 exports.deleteAppCredential = deleteAppCredential;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const getAppCredentialbyViewerEmail = function(viewerEmail) {
+const getAppCredentialbyViewerEmail = function (viewerEmail) {
   const query = `
     SELECT *
     FROM users
@@ -422,13 +440,14 @@ const getAppCredentialbyViewerEmail = function(viewerEmail) {
     WHERE shared_access.user_id = $1
   ;
 `;
-const values = [
-  `${viewerEmail}`
+  const values = [
+    `${viewerEmail}`
   ];
-return pool.query(query, values)
-.then(res => {
-  logQueries  ? console.log(res.rows) : null;
-  return res.rows});
+  return pool.query(query, values)
+    .then(res => {
+      logQueries ? console.log(res.rows) : null;
+      return res.rows
+    });
 
 };
 exports.getAppCredentialbyViewerEmail = getAppCredentialbyViewerEmail;
