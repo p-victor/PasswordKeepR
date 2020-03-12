@@ -287,7 +287,7 @@ exports.createAppCredential = createAppCredential;
 
 const getAppCredentialById = function(AppCredentialObj) {
   const query = `
-    SELECT app_credentials.*, app_list.name
+    SELECT app_credentials.*, app_list.name AS app_list_name
     FROM app_credentials
     JOIN app_list ON app_list.id = app_credentials.app_id
     WHERE app_credentials.id = $1
