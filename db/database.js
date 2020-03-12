@@ -179,6 +179,44 @@ exports.getAppCredentialsbyViewerId = getAppCredentialsbyViewerId;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+const getUserByName = function(name) {
+  const query = `
+    SELECT *
+    FROM users
+    WHERE name = $1
+    ;
+  `;
+const values = [
+  `${name}`
+  ];
+return pool.query(query, values)
+.then(res => {
+  logQueries  ? console.log(res.rows) : null;
+  return res.rows});
+}
+exports.getUserByName = getUserByName;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const getUserById = function(id) {
+  const query = `
+    SELECT *
+    FROM users
+    WHERE id = $1
+    ;
+  `;
+const values = [
+  `${id}`
+  ];
+return pool.query(query, values)
+.then(res => {
+  logQueries  ? console.log(res.rows) : null;
+  return res.rows});
+}
+exports.getUserById = getUserById;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 const getUserByEmail = function(email) {
   const query = `
     SELECT *
