@@ -10,4 +10,5 @@ function copyToClipboard(target) {
   input.select();
   document.execCommand("copy");
   document.body.removeChild(input)
+  alert("copied to clipboard")
 }

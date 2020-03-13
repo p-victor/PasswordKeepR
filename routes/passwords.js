@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { generatePassword } = require("../public/scripts/generatePassword")
 
+router.get("/new", (req, res) => {
+  res.render("createPassword")
+})
+
 module.exports = ({ revokeAccessOfOneViewerByAppCredentialId, createAppCredential, findApp, createApp, getAppCredentialById, findAppById, getAppCredentialsbyOwnerId, getAppCredentialByViewerId, getUserById, getUserByName, createAppCredentialForViewer, AllsharedByAppCredential }) => {
   router.get("/:passId", (req, res) => {
     getAppCredentialById({ id: req.params.passId })
@@ -13,9 +17,7 @@ module.exports = ({ revokeAccessOfOneViewerByAppCredentialId, createAppCredentia
           });
       });
   });
-  router.get("/new", (req, res) => {
-    res.render("createPassword");
-  });
+
   router.post("/new", (req, res) => {
     //create new password
 
