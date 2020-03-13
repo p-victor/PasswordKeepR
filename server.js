@@ -48,7 +48,7 @@ app.use("/api", apiRoutes(dbHelper));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("createPassword");
+  res.render("index");
 });
 
 app.listen(PORT, () => {
