@@ -2,21 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { generatePassword } = require("../public/scripts/generatePassword")
 
-router.get("/new", (req, res) => {
-  res.render("createPassword")
-})
 
-module.exports = ({ revokeAccessOfOneViewerByAppCredentialId, createAppCredential, findApp, createApp, getAppCredentialById, findAppById, getAppCredentialsbyOwnerId, getAppCredentialByViewerId, getUserById, getUserByName, createAppCredentialForViewer, AllsharedByAppCredential }) => {
-  router.get("/:passId", (req, res) => {
-    getAppCredentialById({ id: req.params.passId })
-      .then(appCredential => {
-        AllsharedByAppCredential(appCredential[0].id)
-          .then(sharedAccesses => {
-            const templateVar = { passwordInfo: appCredential[0], sharedAccesses: sharedAccesses };
-            res.render("passwords", templateVar);
-          });
-      });
-  });
+module.exports = ({ deleteAppCredential, revokeAccessOfOneViewerByAppCredentialId, createAppCredential, findApp, createApp, getAppCredentialById, findAppById, getAppCredentialsbyOwnerId, getAppCredentialByViewerId, getUserById, getUserByName, createAppCredentialForViewer, AllsharedByAppCredential }) => {
+  router.get("/new", (req, res) => {
+    res.render("createPassword")
+  })
 
   router.post("/new", (req, res) => {
     //create new password
@@ -45,8 +35,26 @@ module.exports = ({ revokeAccessOfOneViewerByAppCredentialId, createAppCredentia
       })
       .then(res.redirect("/"));
   });
-  router.post("/:passId/update", (req, res) => {
-    // getAppCredentialById
+
+  router.get("/:passId", (req, res) => {
+    getAppCredentialById({ id: req.params.passId })
+      .then(appCredential => {
+        AllsharedByAppCredential(appCredential[0].id)
+          .then(sharedAccesses => {
+            const templateVar = { passwordInfo: appCredential[0], sharedAccesses: sharedAccesses };
+            res.render("passwords", templateVar);
+          });
+      });
+  });
+
+  router.post("/:passId/delete", (req, res) => {
+    return getAppCredentialsbyOwnerId(req.session.user_id)
+      .then(ownedAppCredentials => {
+        const appCredId = ownedAppCredentials.find(appCredential => appCredential.id == req.params.passId).id;
+        return deleteAppCredential(appCredId);
+      })
+      .then(res.redirect("/passwords/new"))
+      .catch("failed to delete password");
   });
 
   router.post("/:passId/share", (req, res) => {
@@ -67,6 +75,7 @@ module.exports = ({ revokeAccessOfOneViewerByAppCredentialId, createAppCredentia
       .then(res.redirect("back"))
       .catch("no user entered")
   });
+
   router.post("/:passId/share/:viewerId/delete", (req, res) => {
     return getUserById(req.params.viewerId)
       .then(viewer => {
@@ -78,6 +87,7 @@ module.exports = ({ revokeAccessOfOneViewerByAppCredentialId, createAppCredentia
       })
       .then(res.redirect("back"))
   });
+
   router.get("/:passId/view", (req, res) => {
     getAppCredentialById({ id: req.params.passId })
       .then(appCredential => {
